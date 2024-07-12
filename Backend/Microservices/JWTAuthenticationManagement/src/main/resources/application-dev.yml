@@ -1,0 +1,37 @@
+errorCodes:
+  '403': your credentials are wrong
+  '500': internal server error
+  '406' : Some unexpected error has occured please contact your support team
+  '407' : Some unexpected error has occured please contact your support team
+
+
+defaultTokenExpirationTime : 15
+
+server:
+  port: 9084
+
+
+spring:
+  application:
+    name: JWT-SERVICE
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    password: micro
+    url: jdbc:mysql://localhost:3306/micro_db
+    username: micro
+  jpa:
+    database-platform: org.hibernate.dialect.MySQLDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+access-token:
+  private: ${ACCESS_TOKEN_PRIVATE_KEY_PATH}
+  public: ${ACCESS_TOKEN_PUBLIC_KEY_PATH}
+refresh-token:
+  private: ${REFRESH_TOKEN_PRIVATE_KEY_PATH}
+  public: ${REFRESH_TOKEN_PUBLIC_KEY_PATH}
+logging:
+  level:
+    root: DEBUG
+    org.springframework.security: DEBUG

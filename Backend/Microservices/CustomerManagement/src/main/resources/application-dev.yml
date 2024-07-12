@@ -1,0 +1,15 @@
+debug: true
+
+spring:
+  application:
+    name: CUSTOMER-SERVICE
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    password: micro
+    url: jdbc:mysql://localhost:3306/micro_db
+    username: micro
+  jpa:
+    database-platform: org.hibernate.dialect.MySQLDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true

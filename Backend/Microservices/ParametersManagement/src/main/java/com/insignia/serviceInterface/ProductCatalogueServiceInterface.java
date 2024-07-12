@@ -1,0 +1,20 @@
+package com.insignia.serviceInterface;
+
+import java.util.List;
+
+import com.insignia.customExceptions.InvalidInputParametersException;
+import com.insignia.customExceptions.TokenExpiredException;
+import com.insignia.model.ProductCatalogueRequest;
+import com.insignia.model.ProductCatalogueResponse;
+
+public interface ProductCatalogueServiceInterface {
+
+	public ProductCatalogueResponse saveProductCatalogue(ProductCatalogueRequest productCatalogueRequest) throws InvalidInputParametersException, TokenExpiredException;
+
+	public ProductCatalogueResponse updateProductCatalogue(ProductCatalogueRequest productCatalogueRequest) throws InvalidInputParametersException, TokenExpiredException;
+
+	public void deleteProductCatalogue(ProductCatalogueRequest productCatalogueRequest) throws InvalidInputParametersException, TokenExpiredException;
+
+	public List<ProductCatalogueResponse> getAllProductCatalogue(ProductCatalogueRequest productCatalogueRequest) throws TokenExpiredException;
+
+}

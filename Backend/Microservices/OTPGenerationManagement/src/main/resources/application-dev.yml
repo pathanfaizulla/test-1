@@ -1,0 +1,28 @@
+server:
+  port: 9086
+  
+spring:
+  application:
+    name: COMPANY-SERVICE
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    password: octopus6#Bid7
+    url: jdbc:mysql://132.226.130.209:3306/micro
+    username: techteam
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: connect@insigniacs.in
+    password: zwwpudtzjbvlifpq
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls.enable: true

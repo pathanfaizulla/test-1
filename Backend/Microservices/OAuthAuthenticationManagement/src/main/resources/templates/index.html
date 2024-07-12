@@ -1,0 +1,112 @@
+<html xmlns:th="https://www.thymeleaf.org/">
+
+<head>
+	<title>WELCOME TO LOGIN</title>
+	<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+		integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+</head>
+
+<body>
+	<div style="text-align: center;">
+		<h2>Login</h2>
+
+
+		<label for="UserId">UserId:</label>
+		<input type="text" id="userId" name="userId" value='' />
+		</br>
+		</br>
+
+		<label for="password">Password:</label>
+		<input type="password" id="password" name="password" value='' />
+		</br>
+		</br>
+
+
+		<label for="ApplicationId">ApplicationId:</label>
+		<input type="text" id="applicationId" name="applicationId" value='' />
+		</br>
+		</br>
+
+		<label for="TenantId">TenantId:</label>
+		<input type="text" id="tenantId" name="tenantId" value='' />
+		</br>
+		</br>
+
+		<span th:text="${error}" style="color: red"></span>
+
+		</br>
+
+		<input type="button" id='form' value="submit">
+
+
+		<div class="instagram icon">
+			<a href="oauth2authentication?isToValidatePassword=true"><i class="fab  fa-google"></i> </a>
+			<a href="oauth2authentication?isToValidatePassword=true"><i class="fab  fa-facebook"></i> </a>
+			<a href="oauth2authentication?isToValidatePassword=true"><i class="fab  fa-github"></i> </a>
+
+		</div>
+
+		<script>
+
+
+			const form = document.getElementById('form');
+
+			form.addEventListener('click', (event) => {
+				fetJwtToken();
+				event.preventDefault()
+
+
+			})
+
+			async function fetJwtToken() {
+				var userId = document.getElementById("userId").value;
+				var password = document.getElementById("password").value;
+				var applicationId = document.getElementById("applicationId").value;
+				var tenantId = document.getElementById("tenantId").value;
+
+				console.log(userId)
+				console.log(password)
+				console.log(applicationId)
+				console.log(tenantId)
+
+
+				var authenticationRequest = {
+					"userId": userId,
+					"password": password,
+					"applicationId": applicationId,
+					"tenantId": tenantId
+				}
+
+				await fetch("https://oauth.insigniaconsultancy.com:8082/jwtToken", {
+					method: "POST",
+					mode: "cors",
+					cache: "no-cache",
+					credentials: "same-origin",
+					headers: {
+						"Content-Type": "application/json"
+
+					},
+					body: JSON.stringify(authenticationRequest),
+				}).then(re => {
+
+					return re.json();
+				}).then(shrtUrl => {
+
+
+
+				});
+
+			}
+
+
+		</script>
+
+	</div>
+
+
+
+
+
+</body>
+
+</html>

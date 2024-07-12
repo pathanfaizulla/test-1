@@ -1,0 +1,29 @@
+server:
+  port: 9055
+
+spring:
+  application:
+    name: PRODUCT-SERVICE
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    password: ${spring.datasource.password}
+    url: jdbc:mysql://132.226.130.209:3306/${spring.datasource.database}
+    username: ${spring.datasource.username}
+  jpa:
+    database-platform: org.hibernate.dialect.MySQLDialect
+    hibernate:
+      ddl-auto: update
+      format_sql: true
+    show-sql: true
+  cloud:
+    vault:
+      kv:
+        enabled: true
+      authentication: TOKEN
+      token: hvs.rodctqekr2kwKKt7AHqmqU30
+      scheme: https
+      host: vault.insigniaconsultancy.com
+      port: 8200
+  config:
+    import: vault://secrets/insignia
+      

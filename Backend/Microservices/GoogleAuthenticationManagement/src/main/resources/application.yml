@@ -1,0 +1,15 @@
+server:
+  port: 8082
+
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: 364520571875-t3cjtcra85chc1hgniv3ltkb8q1sgcf1.apps.googleusercontent.com
+            client-secret: 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
+            redirectUri : http://localhost:8082/oauth2/callback/google
+            scope:
+            - email
+            - profile

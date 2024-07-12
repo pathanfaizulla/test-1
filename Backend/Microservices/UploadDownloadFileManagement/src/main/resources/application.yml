@@ -1,0 +1,46 @@
+server:
+  port: 9072
+
+spring:
+  application:
+    name: UPLOADDOWNLOAD-SERVICE
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    password: ${spring.datasource.password}
+    url: jdbc:mysql://132.226.130.209:3306/${spring.datasource.database}
+    username: ${spring.datasource.username}
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+  cloud:
+    vault:
+      kv:
+        enabled: true
+      authentication: TOKEN
+      token: hvs.rodctqekr2kwKKt7AHqmqU30
+      scheme: https
+      host: vault.insigniaconsultancy.com
+      port: 8200
+  config:
+    import: vault://secrets/insignia
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "prometheus"
+  metrics:
+    tags:
+      application: ${spring.application.name}
+amazon:
+  s3:
+    accessKey: ${amazon.s3.accessKey}
+    secretKey: ${amazon.s3.secretKey}
+    bucketName: ${amazon.s3.bucketName}
+    region: ap-south-1
