@@ -1,0 +1,213 @@
+---
+- hosts: server2
+  become: yes
+  become_method: sudo
+  remote_user: ansadmin
+
+  vars:
+    service_name: jwt-authentication-service
+    local_jar_path: /home/ubuntu/workspace/Microservice-Dev/Backend/Microservices/JWTAuthenticationManagement/target/JWTAuthenticationManagement-0.0.1-SNAPSHOT.jar
+    remote_jar_path: /opt/DeploymentFiles/JWTAuthenticationManagement-0.0.1-SNAPSHOT.jar
+    remote_jar_directory: /opt/DeploymentFiles
+    systemd_service_file: /etc/systemd/system/{{ service_name }}.service
+
+  tasks:
+    - name: Create application directory
+      file:
+        path: "{{ remote_jar_directory }}"
+        state: directory
+        owner: root
+        group: root
+        mode: '0755'
+
+    - name: Copy and deploy JWTAuthenticationManagement JAR file
+      copy:
+        src: "{{ local_jar_path }}"
+        dest: "{{ remote_jar_path }}"
+        owner: root
+        group: root
+        mode: '0755'
+      notify:
+        - restart jwt-authentication-service
+
+    - name: Restart JWT Authentication Service
+      systemd:
+        name: "{{ service_name }}"
+        state: restarted
+        daemon_reload: yes
+
+    - name: Copy and deploy CustomerManagement JAR file
+      copy:
+        src: /home/ubuntu/workspace/Microservice-Dev/Backend/Microservices/CustomerManagement/target/CustomerManagement-0.0.1-SNAPSHOT.jar
+        dest: /opt/DeploymentFiles/CustomerManagement-0.0.1-SNAPSHOT.jar
+        owner: root
+        group: root
+        mode: '0755'
+      notify:
+        - restart customer-management
+
+    - name: Restart Customer Management
+      systemd:
+        name: customer-management
+        state: restarted
+        daemon_reload: yes
+
+    - name: Copy and deploy UploadDownloadFileManagement JAR file
+      copy:
+        src: /home/ubuntu/workspace/Microservice-Dev/Backend/Microservices/UploadDownloadFileManagement/target/UploadDownloadFileManagement-0.0.1-SNAPSHOT.jar
+        dest: /opt/DeploymentFiles/UploadDownloadFileManagement-0.0.1-SNAPSHOT.jar
+        owner: root
+        group: root
+        mode: '0755'
+      notify:
+        - restart upload-download-file-management
+
+    - name: Restart Upload Download File Management
+      systemd:
+        name: upload-download-file-management
+        state: restarted
+        daemon_reload: yes
+
+    - name: Copy and deploy ProductCategoryManagement JAR file
+      copy:
+        src: /home/ubuntu/workspace/Microservice-Dev/Backend/Microservices/ProductCategoryManagement/target/ProductCategoryManagement-0.0.1-SNAPSHOT.jar
+        dest: /opt/DeploymentFiles/ProductCategoryManagement-0.0.1-SNAPSHOT.jar
+        owner: root
+        group: root
+        mode: '0755'
+      notify:
+        - restart product-category-management
+
+    - name: Restart Product Category Management
+      systemd:
+        name: product-category-management
+        state: restarted
+        daemon_reload: yes
+
+    - name: Copy and deploy ProductManagement JAR file
+      copy:
+        src: /home/ubuntu/workspace/Microservice-Dev/Backend/Microservices/ProductManagement/target/ProductManagement-0.0.1-SNAPSHOT.jar
+        dest: /opt/DeploymentFiles/ProductManagement-0.0.1-SNAPSHOT.jar
+        owner: root
+        group: root
+        mode: '0755'
+      notify:
+        - restart product-management
+
+    - name: Restart Product Management
+      systemd:
+        name: product-management
+        state: restarted
+        daemon_reload: yes
+
+    - name: Copy and deploy OTPGenerationManagement JAR file
+      copy:
+        src: /home/ubuntu/workspace/Microservice-Dev/Backend/Microservices/OTPGenerationManagement/target/OTPGenerationManagement-0.0.1-SNAPSHOT.jar
+        dest: /opt/DeploymentFiles/OTPGenerationManagement-0.0.1-SNAPSHOT.jar
+        owner: root
+        group: root
+        mode: '0755'
+      notify:
+        - restart otp-generation-management
+
+    - name: Restart OTP Generation Management
+      systemd:
+        name: otp-generation-management
+        state: restarted
+        daemon_reload: yes
+
+    - name: Copy and deploy OrderManagement JAR file
+      copy:
+        src: /home/ubuntu/workspace/Microservice-Dev/Backend/Microservices/OrderManagement/target/OrderManagement-0.0.1-SNAPSHOT.jar
+        dest: /opt/DeploymentFiles/OrderManagement-0.0.1-SNAPSHOT.jar
+        owner: root
+        group: root
+        mode: '0755'
+      notify:
+        - restart order-management
+
+    - name: Restart Order Management
+      systemd:
+        name: order-management
+        state: restarted
+        daemon_reload: yes
+
+    - name: Copy and deploy CartManagement JAR file
+      copy:
+        src: /home/ubuntu/workspace/Microservice-Dev/Backend/Microservices/CartManagement/target/CartManagement-0.0.1-SNAPSHOT.jar
+        dest: /opt/DeploymentFiles/CartManagement-0.0.1-SNAPSHOT.jar
+        owner: root
+        group: root
+        mode: '0755'
+      notify:
+        - restart cart-management
+
+    - name: Restart Cart Management
+      systemd:
+        name: cart-management
+        state: restarted
+        daemon_reload: yes
+
+    - name: Copy and deploy SubscriptionPlanManagement JAR file
+      copy:
+        src: /home/ubuntu/workspace/Microservice-Dev/Backend/Microservices/SubscriptionPlanManagement/target/SubscriptionPlanManagement-0.0.1-SNAPSHOT.jar
+        dest: /opt/DeploymentFiles/SubscriptionPlanManagement-0.0.1-SNAPSHOT.jar
+        owner: root
+        group: root
+        mode: '0755'
+      notify:
+        - restart subscription-plan-management
+
+    - name: Restart Subscription Plan Management
+      systemd:
+        name: subscription-plan-management
+        state: restarted
+        daemon_reload: yes
+
+    - name: Copy and deploy AddressManagement JAR file
+      copy:
+        src: /home/ubuntu/workspace/Microservice-Dev/Backend/Microservices/AddressManagement/target/AddressManagement-0.0.1-SNAPSHOT.jar
+        dest: /opt/DeploymentFiles/AddressManagement-0.0.1-SNAPSHOT.jar
+        owner: root
+        group: root
+        mode: '0755'
+      notify:
+        - restart address-management
+
+    - name: Restart Address Management
+      systemd:
+        name: address-management
+        state: restarted
+        daemon_reload: yes
+
+    - name: Copy and deploy WishlistManagement JAR file
+      copy:
+        src: /home/ubuntu/workspace/Microservice-Dev/Backend/Microservices/WishlistManagement/target/WishlistManagement-0.0.1-SNAPSHOT.jar
+        dest: /opt/DeploymentFiles/WishlistManagement-0.0.1-SNAPSHOT.jar
+        owner: root
+        group: root
+        mode: '0755'
+      notify:
+        - restart wishlist-management
+
+    - name: Restart Wishlist Management
+      systemd:
+        name: wishlist-management
+        state: restarted
+        daemon_reload: yes
+
+    - name: Copy and deploy ParametersManagement JAR file
+      copy:
+        src: /home/ubuntu/workspace/Microservice-Dev/Backend/Microservices/ParametersManagement/target/ParametersManagement-0.0.1-SNAPSHOT.jar
+        dest: /opt/DeploymentFiles/ParametersManagement-0.0.1-SNAPSHOT.jar
+        owner: root
+        group: root
+        mode: '0755'
+      notify:
+        - restart parameters-management
+
+    - name: Restart Parameters Management
+      systemd:
+        name: parameters-management
+        state: restarted
+        daemon_reload: yes
