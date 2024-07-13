@@ -1,14 +1,9 @@
 pipeline {
-  agent { label 'jenkins-slave'}
-
-  environment {
-    NEXUS_CREDENTIAL_ID = 'Nexus-Credential'
-    VERSION = "${env.BUILD_ID}-${env.BUILD_TIMESTAMP}".replaceAll(/[\s:]/, "-")
-  }
-
+  agent any
+  
   tools {
-    maven 'Maven-Test'
-    jdk 'OpenJDK17'
+    maven 'maven'
+    jdk 'JAVA'
   }
   
   stages {
@@ -20,7 +15,7 @@ pipeline {
 
     stage('Deploy to server using Ansible') {
       steps {
-        ansiblePlaybook credentialsId: 'newuseransadmin', installation: 'Ansible', inventory: 'dev.inv', playbook: 'playbook.yml'
+        ansiblePlaybook credentialsId: 'ansadminssh', disableHostKeyChecking: true, installation: 'ansible', inventory: 'dev.inv', playbook: 'playbook.yml'
       }
     }
   }
