@@ -16,20 +16,7 @@
 
     <build>
         <plugins>
-            <plugin>
-                <groupId>org.sonatype.plugins</groupId>
-                <artifactId>nxrm3-maven-plugin</artifactId>
-                <version>1.0.6</version>
-                <extensions>true</extensions>
-                <configuration>
-                    <nexusUrl>http://44.193.71.208:8081</nexusUrl>
-                    <serverId>nexus</serverId>
-                    <repository>microservices-central-repo</repository>
-                    <repositoryUrl>http://44.193.71.208:8081/repository/microservices-central-repo/</repositoryUrl>
-                    <skipNexusStagingDeplyMojo>true</skipNexusStagingDeplyMojo>
-                </configuration>
-            </plugin>
+            <!-- Removed Nexus Plugin Configuration -->
         </plugins>
     </build>
-
 </project>
