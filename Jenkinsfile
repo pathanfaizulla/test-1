@@ -1,5 +1,5 @@
 pipeline {
-  agent any
+  agent { label 'ansible'}
   
   tools {
     maven 'maven'
