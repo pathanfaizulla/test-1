@@ -2,7 +2,7 @@
 - hosts: server2
   become: yes
   become_method: sudo
-  remote_user: ansadmin
+  remote_user: root
 
   vars:
     service_name: jwt-authentication-service
